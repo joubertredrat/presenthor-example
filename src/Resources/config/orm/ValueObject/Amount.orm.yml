@@ -1,0 +1,9 @@
+App\ValueObject\Amount:
+    type: embeddable
+    fields:
+        value:
+            type: integer
+            length: 11
+        currency:
+            type: string
+            length: 5

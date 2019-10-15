@@ -1,60 +1,81 @@
 {
-    "type": "project",
-    "license": "proprietary",
-    "require": {
-        "php": "^7.0.8",
-        "ext-ctype": "*",
-        "ext-iconv": "*",
-        "symfony/console": "3.4.*",
-        "symfony/dotenv": "3.4.*",
-        "symfony/flex": "^1.3.1",
-        "symfony/framework-bundle": "3.4.*",
-        "symfony/yaml": "3.4.*"
+  "type": "project",
+  "license": "proprietary",
+  "require": {
+    "php": ">=7.2",
+    "ext-ctype": "*",
+    "ext-iconv": "*",
+    "ext-json": "*",
+    "redrat/entity-datetime": "^0.2.0",
+    "redrat/presenthor": "^0.2.0",
+    "symfony/console": "3.4.*",
+    "symfony/dotenv": "3.4.*",
+    "symfony/flex": "^1.3.1",
+    "symfony/framework-bundle": "3.4.*",
+    "symfony/orm-pack": "^1.0",
+    "symfony/yaml": "3.4.*"
+  },
+  "require-dev": {
+    "doctrine/doctrine-fixtures-bundle": "^3.2",
+    "phpunit/phpunit": "^8.4",
+    "squizlabs/php_codesniffer": "^3.5",
+    "symfony/maker-bundle": "^1.13",
+    "symfony/var-dumper": "3.4.*"
+  },
+  "config": {
+    "preferred-install": {
+      "*": "dist"
     },
-    "require-dev": {
-    },
-    "config": {
-        "preferred-install": {
-            "*": "dist"
-        },
-        "sort-packages": true
-    },
-    "autoload": {
-        "psr-4": {
-            "App\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "App\\Tests\\": "tests/"
-        }
-    },
-    "replace": {
-        "paragonie/random_compat": "2.*",
-        "symfony/polyfill-ctype": "*",
-        "symfony/polyfill-iconv": "*",
-        "symfony/polyfill-php70": "*",
-        "symfony/polyfill-php56": "*"
-    },
-    "scripts": {
-        "auto-scripts": {
-            "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd"
-        },
-        "post-install-cmd": [
-            "@auto-scripts"
-        ],
-        "post-update-cmd": [
-            "@auto-scripts"
-        ]
-    },
-    "conflict": {
-        "symfony/symfony": "*"
-    },
-    "extra": {
-        "symfony": {
-            "allow-contrib": false,
-            "require": "3.4.*"
-        }
+    "sort-packages": true
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "App\\Tests\\": "tests/"
+    }
+  },
+  "replace": {
+    "paragonie/random_compat": "2.*",
+    "symfony/polyfill-ctype": "*",
+    "symfony/polyfill-iconv": "*",
+    "symfony/polyfill-php70": "*",
+    "symfony/polyfill-php56": "*"
+  },
+  "scripts": {
+    "auto-scripts": {
+      "cache:clear": "symfony-cmd",
+      "assets:install %PUBLIC_DIR%": "symfony-cmd"
+    },
+    "post-install-cmd": [
+      "@auto-scripts"
+    ],
+    "post-update-cmd": [
+      "@auto-scripts"
+    ],
+    "psr2": [
+      "vendor/squizlabs/php_codesniffer/bin/phpcs --standard=PSR2 --extensions=php,inc,lib src/",
+      "vendor/squizlabs/php_codesniffer/bin/phpcs --standard=PSR2 --extensions=php,inc,lib tests/"
+    ],
+    "tests": "vendor/phpunit/phpunit/phpunit -c phpunit.xml.dist --no-coverage",
+    "coverage": "vendor/phpunit/phpunit/phpunit -c phpunit.xml.dist",
+    "example": [
+      "bin/console doctrine:database:drop --force",
+      "bin/console doctrine:database:create",
+      "bin/console doctrine:schema:create",
+      "bin/console doctrine:fixtures:load"
+    ]
+  },
+  "conflict": {
+    "symfony/symfony": "*"
+  },
+  "extra": {
+    "symfony": {
+      "allow-contrib": false,
+      "require": "3.4.*"
+    }
+  }
 }

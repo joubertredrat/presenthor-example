@@ -1,0 +1,6 @@
+App\ValueObject\Operation\Status:
+    type: embeddable
+    fields:
+        name:
+            type: string
+            length: 20

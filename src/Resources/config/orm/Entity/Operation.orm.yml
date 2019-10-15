@@ -1,0 +1,25 @@
+App\Entity\Operation:
+    type: entity
+    repositoryClass: App\Repository\OperationRepository
+    lifecycleCallbacks:
+        prePersist: [ forgeCreatedAt ]
+        preUpdate: [ forgeUpdatedAt ]
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: auto
+    fields:
+        resultHash:
+            type: string
+            length: 150
+        createdAt:
+            type: datetime
+        updatedAt:
+            type: datetime
+            nullable: true
+    embedded:
+        amount:
+            class: App\ValueObject\Amount
+        status:
+            class: App\ValueObject\Operation\Status

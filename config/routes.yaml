@@ -4,3 +4,13 @@
 #index:
 #    path: /
 #    defaults: { _controller: 'App\Controller\DefaultController::index' }
+
+operations_get:
+    path: /api/v1/operations/{id}
+    controller: App\Controller\OperationController::actionGet
+    methods: [GET]
+
+operations_list:
+    path: /api/v1/operations
+    controller: App\Controller\OperationController::actionList
+    methods: [GET]
